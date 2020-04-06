@@ -1,3 +1,7 @@
+li {
+    list-style: none;
+}
+
 .chat-app {
     display: flex;
     flex-direction: column;
@@ -7,6 +11,8 @@
     width: 25vw;
     height: 50vh;
     background-color: #eeeeee;
+
+    overflow-y: scroll;
 }
 
 .chat-app__user-interaction {
