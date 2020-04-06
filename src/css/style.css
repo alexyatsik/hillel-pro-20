@@ -1,0 +1,14 @@
+.chat-app {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-app__window {
+    width: 25vw;
+    height: 50vh;
+    background-color: #eeeeee;
+}
+
+.chat-app__user-interaction {
+    display: flex;
+}
