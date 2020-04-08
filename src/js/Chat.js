@@ -3,10 +3,14 @@
 class Chat {
     constructor() {
         this.isActive = true;
+        this.isUserLeave = false;
+
         const root = $nR('#chat-app');
         root.classList.add('chat-app');
+
         this.chatWindow = document.createElement('div');
         this.chatWindow.classList.add('chat-app__window');
+
         this.chatText = document.createElement('ul');
 
         this.userInteraction = document.createElement('div');
@@ -30,7 +34,8 @@ class Chat {
                 this.input.value = '';
                 clearInterval(this.booring);
                 this.isActive = false;
-                this.showMessage('До встречи!');
+                this.isUserLeave = true;
+                this.answer();
                 return;
             }
             
@@ -42,9 +47,12 @@ class Chat {
             }
         });
 
+
         this.chatWindow.appendChild(this.chatText);
+
         this.userInteraction.appendChild(this.input);
         this.userInteraction.appendChild(this.send);
+        
         root.appendChild(this.chatWindow);
         root.appendChild(this.userInteraction);
     }
@@ -56,6 +64,9 @@ class Chat {
     }
 
     async answers() {
+        if (this.isUserLeave) {
+            return timeout('До встречи!', rand(0, 10));
+        }
         const message = [
             'Привет',
             'Куда пропал?',
@@ -67,9 +78,10 @@ class Chat {
         return timeout(message, rand(0, 10));
     }
     
-    async answer(bye = false) {
+    async answer() {
         const message = await this.answers();
         this.showMessage(message);
+
         this.booring = setTimeout(() => {
             if (!this.isActive) {
                 return;
